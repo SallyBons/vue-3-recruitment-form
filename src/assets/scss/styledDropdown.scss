@@ -1,0 +1,212 @@
+@import "./variables";
+
+.birthday-component,
+.mobile-tel-component,
+.custom-dropdown-component {
+  .input-wrapper {
+    .vue-select-wrapper {
+      margin: 0 30px;
+      max-width: 190px;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      position: relative;
+      @media (max-width: 768.8px) {
+        margin: 0 12px;
+      }
+      &.active {
+        .vue-select {
+          .vue-select-header {
+            .vue-input {
+              input {
+                &::placeholder {
+                  color: initial;
+                  font-weight: normal;
+                }
+              }
+            }
+          }
+        }
+      }
+      .vue-select {
+        border: 1px solid $main-grey;
+        border-radius: 10px;
+        max-width: 190px;
+        width: 100%;
+        height: 48px;
+        padding: 0 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        @media (min-width: 320px) and (max-width: 375px) {
+          padding: 0 15px;
+        }
+        &:focus {
+          border-color: $template-color;
+        }
+        position: relative;
+        .vue-select-header {
+          position: relative;
+          max-width: 150px;
+          width: 100%;
+          .vue-input {
+            input {
+              max-width: 150px;
+              width: 100%;
+              font-family: "Inter", sans-serif;
+              font-style: normal;
+              font-size: 14px;
+              line-height: 17px;
+              box-sizing: border-box;
+              cursor: pointer;
+              &::placeholder {
+                color: $main-grey;
+                font-weight: bold;
+              }
+
+              &:focus {
+                border-color: $template-color;
+              }
+              @media (max-width: 425px) {
+                word-wrap: break-word;
+              }
+            }
+          }
+          .icon {
+            position: absolute;
+            top: 6px;
+            right: -5px;
+
+            &.arrow-downward {
+              border: solid $template-color;
+              border-width: 0 2px 2px 0;
+              display: inline-block;
+              padding: 3px;
+              content: "";
+              transition: transform 0.2s linear;
+              cursor: pointer;
+              transform: rotate(45deg);
+              -webkit-transform: rotate(45deg);
+
+              &.active {
+                transform: rotate(225deg);
+                -webkit-transform: rotate(225deg);
+                top: 10px;
+                right: -5px;
+              }
+            }
+          }
+        }
+        .vue-dropdown {
+          position: absolute;
+          top: 52px !important;
+          left: 0px;
+          z-index: 3;
+          max-width: 195px;
+          width: 100%;
+          height: 145px;
+          overflow-y: scroll;
+          border: 1px solid $template-color;
+          border-radius: 10px;
+          border-color: transparent;
+          -webkit-border-end: none;
+          -webkit-border-start: 1px solid $template-color;
+          -webkit-border-before: 1px solid $template-color;
+          -webkit-border-after: 1px solid $template-color;
+          outline: none;
+          padding: 0px;
+          background-color: $main-heading-color;
+
+          &::-webkit-scrollbar {
+            width: 16px;
+            padding-top: 30px;
+            border: 1px solid $template-color; /* creates padding around scroll thumb */
+            border-radius: 10px;
+          }
+          &::-webkit-scrollbar-track {
+            background: $main-heading-color;
+            border-radius: 10px;
+            visibility: hidden;
+            margin-right: 5px;
+            padding: 5px 0px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: $template-color; /* color of the scroll thumb */
+            border-radius: 10px; /* roundness of the scroll thumb */
+            border: 1px solid $template-color; /* creates padding around scroll thumb */
+          }
+
+          .vue-dropdown-item {
+            width: 100%;
+            font-family: "Inter", sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 17px;
+            box-sizing: border-box;
+            padding: 10px 0px 10px 15px;
+            @media (min-width: 320px) and (max-width: 375px) {
+              padding: 10px 5px;
+            }
+            cursor: pointer;
+
+            &:hover {
+              background-color: rgba(90, 163, 218, 0.2);
+              color: $template-color;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.mobile-tel-component {
+  .input-wrapper {
+    .vue-select-wrapper {
+      margin: 0;
+      @media (max-width: 375px) {
+        max-width: 130px;
+        margin-right: 14px;
+      }
+      .vue-select {
+        .vue-dropdown {
+          height: 110px;
+          .vue-dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+.custom-dropdown-component {
+  .input-wrapper {
+    .vue-select-wrapper {
+      max-width: 630px;
+      margin: 0;
+      @media (max-width: 768px) {
+        max-width: 100%;
+      }
+      .vue-select {
+        max-width: unset;
+        .vue-select-header {
+          max-width: unset;
+          .vue-input {
+            input {
+              max-width: unset;
+            }
+          }
+        }
+        .vue-dropdown {
+          max-width: unset;
+        }
+      }
+    }
+  }
+}
