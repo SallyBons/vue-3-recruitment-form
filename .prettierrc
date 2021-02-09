@@ -1,0 +1,5 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "comma-dangle": [2, "always-multiline"]
+}
