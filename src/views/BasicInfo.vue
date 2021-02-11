@@ -11,7 +11,6 @@
       :mandatory="false"
       :placeholder="'Ваш адрес'"
       v-model="address"
-      :errorMessage="errorMessages.address"
     />
 
     <MobileTelephoneComponent :title="'Номер телефона'" />
@@ -21,12 +20,11 @@
       :mandatory="false"
       :placeholder="'Ваш Skype'"
       v-model="skype"
-      :errorMessage="errorMessages.skype"
     />
     <InputComponent
       :title="'GitHub'"
       :mandatory="false"
-      :placeholder="'Ваш GitHub'"
+      :placeholder="'Ссылка на ваш GitHub'"
       v-model="github"
       :errorMessage="errorMessages.github"
     />
@@ -44,14 +42,14 @@ import PrimaryTemplate from "@/components/serviceComponents/PrimaryTemplate.vue"
 import InputComponent from "@/components/serviceComponents/InputComponent.vue";
 import BirthDayComponent from "@/components/serviceComponents/BirthDayComponent.vue";
 import MobileTelephoneComponent from "@/components/serviceComponents/MobileTelephoneComponent.vue";
-import { alphaNum, url } from "@vuelidate/validators";
+import { url } from "@vuelidate/validators";
 import { getErrorMessage } from "../utils/getErrorMessage.js";
 
 export default {
   name: "BasicInfo",
   data() {
     return {
-      step: "BasicInfo"
+      step: "BasicInfo",
     };
   },
   computed: {
@@ -62,9 +60,9 @@ export default {
       set(value) {
         this.$store.dispatch("setSecondStepField", {
           field: "address",
-          value: value
+          value: value,
         });
-      }
+      },
     },
     skype: {
       get() {
@@ -73,9 +71,9 @@ export default {
       set(value) {
         this.$store.dispatch("setSecondStepField", {
           field: "skype",
-          value: value
+          value: value,
         });
-      }
+      },
     },
     github: {
       get() {
@@ -84,9 +82,9 @@ export default {
       set(value) {
         this.$store.dispatch("setSecondStepField", {
           field: "github",
-          value: value
+          value: value,
         });
-      }
+      },
     },
     socialNetwork: {
       get() {
@@ -95,18 +93,16 @@ export default {
       set(value) {
         this.$store.dispatch("setSecondStepField", {
           field: "socialNetwork",
-          value: value
+          value: value,
         });
-      }
+      },
     },
-    errorMessages: function() {
+    errorMessages: function () {
       return {
-        address: getErrorMessage(this.$v.address.$errors),
-        skype: getErrorMessage(this.$v.skype.$errors),
         github: getErrorMessage(this.$v.github.$errors),
-        socialNetwork: getErrorMessage(this.$v.socialNetwork.$errors)
+        socialNetwork: getErrorMessage(this.$v.socialNetwork.$errors),
       };
-    }
+    },
   },
 
   methods: {
@@ -115,35 +111,27 @@ export default {
       if (!this.$v.$invalid) {
         this.$router.push({ path: "/expectations" });
       }
-    }
+    },
   },
 
   components: {
     PrimaryTemplate,
     InputComponent,
     BirthDayComponent,
-    MobileTelephoneComponent
+    MobileTelephoneComponent,
   },
 
   validations() {
     return {
-      address: {
-        alphaNum,
-        $autoDirty: true
-      },
-      skype: {
-        alphaNum,
-        $autoDirty: true
-      },
       github: {
-        alphaNum,
-        $autoDirty: true
+        url,
+        $autoDirty: true,
       },
       socialNetwork: {
         url,
-        $autoDirty: true
-      }
+        $autoDirty: true,
+      },
     };
-  }
+  },
 };
 </script>
