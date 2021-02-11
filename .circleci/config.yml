@@ -1,0 +1,13 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      # Add SSH key added at CircleCI UI
+      - add_ssh_keys:
+          fingerprints:
+            - "80:49:f1:e4:68:d9:66:15:f1:8c:a1:03:cc:06:18:7d"
+      - run:
+          name: Connect to remote over SSH
+          command: ssh -o "StrictHostKeyChecking no" $SSH_USER@$SSH_HOST "echo "Connection established to $SSH_HOST""      
