@@ -117,7 +117,6 @@ export default {
       }
     },
     handleValidationChange(value) {
-      console.log(value);
       this.birthdayDateInvalid = value;
     }
   },
