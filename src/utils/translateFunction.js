@@ -27,6 +27,9 @@ const translateFunction = message => {
       case "This field should be at least 9 long.":
         translatedText = "Требуется минимум 9 символов";
         break;
+      case "Value must be numeric":
+        translatedText = "Допустимы только цифры";
+        break;
       default:
         translatedText = "Ошибка заполнения поля";
         break;
