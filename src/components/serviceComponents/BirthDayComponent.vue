@@ -111,6 +111,7 @@ export default {
   watch: {
     date: {
       handler() {
+        this.$v.$touch();
         this.$emit("validationChange", this.$v.$invalid);
       },
       deep: true
