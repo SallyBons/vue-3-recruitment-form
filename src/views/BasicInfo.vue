@@ -5,7 +5,10 @@
     :mainTitle="'Основная информация'"
     :needBackButton="false"
   >
-    <BirthDayComponent :title="'Дата рождения'" />
+    <BirthDayComponent
+      :title="'Дата рождения'"
+      @validationChange="handleValidationChange"
+    />
     <InputComponent
       :title="'Адрес'"
       :mandatory="false"
@@ -50,6 +53,7 @@ export default {
   data() {
     return {
       step: "BasicInfo",
+      birthdayDateInvalid: false
     };
   },
   computed: {
@@ -60,9 +64,9 @@ export default {
       set(value) {
         this.$store.dispatch("setSecondStepField", {
           field: "address",
-          value: value,
+          value: value
         });
-      },
+      }
     },
     skype: {
       get() {
@@ -71,9 +75,9 @@ export default {
       set(value) {
         this.$store.dispatch("setSecondStepField", {
           field: "skype",
-          value: value,
+          value: value
         });
-      },
+      }
     },
     github: {
       get() {
@@ -82,9 +86,9 @@ export default {
       set(value) {
         this.$store.dispatch("setSecondStepField", {
           field: "github",
-          value: value,
+          value: value
         });
-      },
+      }
     },
     socialNetwork: {
       get() {
@@ -93,45 +97,49 @@ export default {
       set(value) {
         this.$store.dispatch("setSecondStepField", {
           field: "socialNetwork",
-          value: value,
+          value: value
         });
-      },
+      }
     },
-    errorMessages: function () {
+    errorMessages: function() {
       return {
         github: getErrorMessage(this.$v.github.$errors),
-        socialNetwork: getErrorMessage(this.$v.socialNetwork.$errors),
+        socialNetwork: getErrorMessage(this.$v.socialNetwork.$errors)
       };
-    },
+    }
   },
 
   methods: {
     submit() {
       this.$v.$touch();
-      if (!this.$v.$invalid) {
+      if (!this.$v.$invalid && !this.birthdayDateInvalid) {
         this.$router.push({ path: "/expectations" });
       }
     },
+    handleValidationChange(value) {
+      console.log(value);
+      this.birthdayDateInvalid = value;
+    }
   },
 
   components: {
     PrimaryTemplate,
     InputComponent,
     BirthDayComponent,
-    MobileTelephoneComponent,
+    MobileTelephoneComponent
   },
 
   validations() {
     return {
       github: {
         url,
-        $autoDirty: true,
+        $autoDirty: true
       },
       socialNetwork: {
         url,
-        $autoDirty: true,
-      },
+        $autoDirty: true
+      }
     };
-  },
+  }
 };
 </script>

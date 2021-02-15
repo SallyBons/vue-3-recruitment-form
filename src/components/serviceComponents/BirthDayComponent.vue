@@ -57,7 +57,7 @@ export default {
   props: {
     title: String
   },
-
+  emits: ["validationChange"],
   data() {
     return {
       monthArray: [
@@ -106,6 +106,14 @@ export default {
         month: getErrorMessage(this.$v.date.month.$errors),
         year: getErrorMessage(this.$v.date.year.$errors)
       };
+    }
+  },
+  watch: {
+    date: {
+      handler() {
+        this.$emit("validationChange", this.$v.$invalid);
+      },
+      deep: true
     }
   },
   components: {
