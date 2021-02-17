@@ -45,7 +45,7 @@ export default {
   props: {
     title: String
   },
-
+  emits: ["validationChange"],
   data() {
     return {
       countryArray: [
@@ -90,6 +90,15 @@ export default {
       return {
         number: getErrorMessage(this.$v.number.$errors)
       };
+    }
+  },
+  watch: {
+    number: {
+      handler() {
+        this.$v.$touch();
+        this.$emit("validationChange", this.$v.$invalid);
+      },
+      deep: true
     }
   },
   components: {

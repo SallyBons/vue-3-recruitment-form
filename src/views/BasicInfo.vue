@@ -16,7 +16,10 @@
       v-model="address"
     />
 
-    <MobileTelephoneComponent :title="'Номер телефона'" />
+    <MobileTelephoneComponent
+      :title="'Номер телефона'"
+      @validationChange="handleTelValidationChange"
+    />
 
     <InputComponent
       :title="'Skype'"
@@ -53,7 +56,8 @@ export default {
   data() {
     return {
       step: "BasicInfo",
-      birthdayDateInvalid: false
+      birthdayDateInvalid: false,
+      mobileTelInvalid: false
     };
   },
   computed: {
@@ -112,12 +116,19 @@ export default {
   methods: {
     submit() {
       this.$v.$touch();
-      if (!this.$v.$invalid && !this.birthdayDateInvalid) {
+      if (
+        !this.$v.$invalid &&
+        !this.birthdayDateInvalid &&
+        !this.mobileTelInvalid
+      ) {
         this.$router.push({ path: "/expectations" });
       }
     },
     handleValidationChange(value) {
       this.birthdayDateInvalid = value;
+    },
+    handleTelValidationChange(value) {
+      this.mobileTelInvalid = value;
     }
   },
 
